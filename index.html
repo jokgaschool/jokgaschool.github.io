@@ -92,40 +92,28 @@
   
   <script src="https://gh-tigon.github.io/jokgascholProxy/public/client.js"></script>
   
-  
   <script>
 $(document).ready(function() {
-  // GET 요청 보내기
-  $.ajax({
-    url: 'https://api.github.com/users/octocat',
-    method: 'GET',
-    success: function(response) {
-      console.log(response);
-    }
+  $('#proxyForm').on('submit', function(e) {
+    e.preventDefault();
+
+    var url = $('#url').val();
+
+    $.ajax({
+      url: '/proxy',
+      method: 'POST',
+      data: JSON.stringify({ url: url }),
+      contentType: 'application/json',
+      success: function(response) {
+        console.log(response);
+      },
+      error: function(error) {
+        console.error(error);
+      }
+    });
   });
-
-  $.ajax({
-    url: 'https://api.github.com/gists',
-    method: 'POST',
-    headers: {
-        Authorization: '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'
-    },
-    data: JSON.stringify({
-        description: "Hello World Examples",
-        public: true,
-        files: {
-            "hello_world.rb": {
-                content: "class HelloWorld..."
-            }
-        }
-    }),
-    success:function(response) {
-       console.log(response);
-     }
 });
-
-
-  </script>
+</script>
   
   </div>
   
