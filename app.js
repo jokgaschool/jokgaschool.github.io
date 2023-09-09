@@ -1,42 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Web Proxy</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
+const express = require('express');
+const fetch = require('node-fetch');
+const cors = require('cors');
 
-<body>
+const app = express();
 
-<form id="proxyForm">
-  <label for="url">URL:</label><br>
-  <input type="text" id="url" name="url"><br>
-  <input type="submit" value ="Go">
-</form>
+// Enable CORS for all routes
+app.use(cors());
 
-<div id="content"></div>
+app.use(express.json()); // JSON 파싱 미들웨어
 
-<script>
-$(document).ready(function() {
-  $('#proxyForm').on('submit', function(e) {
-    e.preventDefault();
-
-    var url = $('#url').val();
-
-     $.ajax({
-       url: 'http://localhost:3000/proxy',
-       method: 'POST',
-       data: JSON.stringify({ url: url }),
-       contentType: 'application/json',
-       success: function(response) {
-         $('#content').html(response);
-       },
-       error: function(error) {
-         console.error(error);
-         alert('An error occurred.');
-       }
-     });
-   });
+app.post('/proxy', async (req, res) => {
+  const { url } = req.body; // 클라이언트가 제공한 URL 가져오기
+  
+  try {
+    const response = await fetch(url);
+    const data = await response.text();
+    
+    res.send(data); // 결과 반환
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred.');
+  }
 });
-</script>
 
-</body></html>
+app.listen(3000, () => {
+   console.log("Server is running on port 3000");
+});
