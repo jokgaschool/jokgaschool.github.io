@@ -104,27 +104,27 @@ $(document).ready(function() {
     }
   });
 
-  // POST 요청 보내기 (예: Gist 생성)
   $.ajax({
     url: 'https://api.github.com/gists',
     method: 'POST',
     headers: {
-      Authorization: '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'
+        Authorization: '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'
     },
     data: JSON.stringify({
-      description: "Hello World Examples",
-      public: true,
-      files: {
-        "hello_world.rb": {
-          content: "class HelloWorld\n   def initialize(name)\n      @name = name.capitalize\n   end\n   def sayHi\n      puts \"Hello #{@name}!\"\n   end\nend\nhello = HelloWorld.new('World')\nhello.sayHi"
+        description: "Hello World Examples",
+        public: true,
+        files: {
+            "hello_world.rb": {
+                content: "class HelloWorld..."
+            }
         }
-      }
     }),
     success:function(response) {
        console.log(response);
      }
-  });
 });
+
+	  
 
 
 
