@@ -97,23 +97,35 @@
 $(document).ready(function() {
   // GET 요청 보내기
   $.ajax({
-    url: '/api/hello',
+    url: 'https://api.github.com/users/octocat',
     method: 'GET',
     success: function(response) {
       console.log(response);
     }
   });
 
-  // POST 요청 보내기
+  // POST 요청 보내기 (예: Gist 생성)
   $.ajax({
-    url: '/api/data',
+    url: 'https://api.github.com/gists',
     method: 'POST',
-    data: { name: 'John Doe', age: 25 },
-    success: function(response) {
-      console.log(response);
-    }
+    headers: {
+      Authorization: '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'
+    },
+    data: JSON.stringify({
+      description: "Hello World Examples",
+      public: true,
+      files: {
+        "hello_world.rb": {
+          content: "class HelloWorld\n   def initialize(name)\n      @name = name.capitalize\n   end\n   def sayHi\n      puts \"Hello #{@name}!\"\n   end\nend\nhello = HelloWorld.new('World')\nhello.sayHi"
+        }
+      }
+    }),
+    success:function(response) {
+       console.log(response);
+     }
   });
 });
+
 
 
   </script>
