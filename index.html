@@ -99,19 +99,20 @@ $(document).ready(function() {
 
     var url = $('#url').val();
 
-    $.ajax({
-      url: '/proxy',
-      method: 'POST',
-      data: JSON.stringify({ url: url }),
-      contentType: 'application/json',
-      success: function(response) {
-        console.log(response);
-      },
-      error: function(error) {
-        console.error(error);
-      }
-    });
-  });
+     $.ajax({
+       url: 'http://localhost:3000/proxy',
+       method: 'POST',
+       data: JSON.stringify({ url: url }),
+       contentType: 'application/json',
+       success: function(response) {
+         $('#content').html(response);
+       },
+       error: function(error) {
+         console.error(error);
+         alert('An error occurred.');
+       }
+     });
+   });
 });
 </script>
   
