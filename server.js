@@ -1,16 +1,20 @@
 const express = require('express');
-const request = require('request');
+const cors = require('cors');
+
+// Express 앱 생성
 const app = express();
 
-app.use(express.static('public'));  // 'public' 디렉토리의 정적 파일을 제공
+// CORS 미들웨어 사용. 특정 도메인에서 오는 요청만 허용.
+app.use(cors({
+  origin: 'https://jokga-school.netlify.app'
+}));
 
-app.get('/proxy', function(req, res) {
-    const urlToProxy = req.query.url;
+// 나머지 라우트 및 미들웨어 설정
 
-    // 요청된 URL로 요청을 전달하고 응답을 클라이언트에게 돌려줍니다.
-    request({url: urlToProxy}).pipe(res);
+app.get('/', (req, res) => {
+  res.send('Hello World!');
 });
 
-app.listen(3000, function() {
-    console.log('Proxy server is running on port 3000')
+app.listen(3000, () => {
+  console.log('App is running on port 3000');
 });
