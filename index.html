@@ -84,37 +84,29 @@
   <h2>해누리가 환장할 엄청난 사이트</h2><p class="f2 b lh-title mb2">들키지 않도록 주의하세요.</p><h2></h2>
   
   <form id="proxyForm">
-      <label for="url">URL:</label><br>
-      <input type="text" id="url" name="url"><br>
-      <input type="submit" value ="Go">
-  </form>
-  
-  
-  <script src="https://gh-tigon.github.io/jokgascholProxy/public/client.js"></script>
-  
-  <script>
-$(document).ready(function() {
-  $('#proxyForm').on('submit', function(e) {
-    e.preventDefault();
+    <label for="url">URL:</label><br>
+    <input type="text" id="url" name="url"><br>
+    <input type="submit" value ="Go">
+</form>
 
-    var url = $('#url').val();
+<!-- 추가된 에쁜 버튼 -->
+<button id="beautifulButton">에쁜 버튼</button>
 
-     $.ajax({
-       url: 'https://672c-124-5-242-151.ngrok-free.app',
-       method: 'POST',
-       data: JSON.stringify({ url: url }),
-       contentType: 'application/json',
-       success: function(response) {
-         $('#content').html(response);
-       },
-       error: function(error) {
-         console.error(error);
-         alert('An error occurred.');
-       }
-     });
-   });
-});
-</script>
+<script>
+
+  // 에쁜 버튼 이벤트 리스너 추가
+  document.getElementById('beautifulButton').addEventListener('click', function() {
+    const url = 'https://hosteagle.club/index?__cpo=aHR0cHM6Ly9jb21pYy5uYXZlci5jb20';
+  });
+  
+ </script>
+    
+    
+
+  <script src="/client.js"></script>
+
+
+  </script>
   
   </div>
   
